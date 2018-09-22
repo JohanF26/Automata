@@ -24,14 +24,17 @@ class State{
 public:
     int q;
     stateType stTyp;
+    bool isFree;
     //find the transition for the given input
     vector<transition> transitions;
     State(){
+	    isFree = false;
     }
     ~State(){
-        for(int t = 0; t < transitions.size(); t++){
-            free(&transitions.at(t));
-        }
+	isFree = true;
+	for(int t = 0; t < transitions.size(); t++){
+		free(&transitions.at(t));
+	}
     }
 };
 
@@ -177,9 +180,17 @@ void stateMachine(vector<State*>* states, int startState, char* inputString, int
                     newQ = st->transitions[j].r;
                     newInputStr[i] = st->transitions[j].b;
                     if(st->transitions[j].x == 'L'){
-                        i--;
+                        if(i == 0){
+				continue;
+			} else{
+			   	i--;
+			}
                     } else{
-                        i++;
+			if(i > strlen(newInputStr)){
+                        	continue;
+			} else{
+				i++;
+			}
                     }
                     break;
                 }
@@ -322,9 +333,6 @@ int main(int argc, char *argv[]){
         }
     }
     */
-    for(int s = 0; s < states.size(); s++){
-        delete states.at(s);
-    }
     return 0;
 
 }
