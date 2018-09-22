@@ -30,7 +30,7 @@ public:
     }
     ~State(){
         for(int t = 0; t < transitions.size(); t++){
-            free(transitions.at(t));
+            free(&transitions.at(t));
         }
     }
 };
