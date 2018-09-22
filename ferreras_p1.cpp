@@ -28,6 +28,10 @@ public:
     vector<transition> transitions;
     State(){
     }
+    ~State(){
+        free transitions;
+        delete transitions;
+    }
 };
 
 int processFile(char* fileName, vector<State*>* states){
