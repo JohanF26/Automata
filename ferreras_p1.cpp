@@ -194,7 +194,6 @@ void stateMachine(vector<State*>* states, int startState, char* inputString, int
     if(!terminated){
         printf("%d quit\n", st->q);
     }
-    printf("done\n");
     return;
 }
 
