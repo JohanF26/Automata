@@ -155,7 +155,7 @@ void stateMachine(vector<State*>* states, int startState, char* inputString, int
 
     int i = 1;
     int newQ;
-    while(i < strlen(newInputStr) && maxTrans > 0){
+    while(i <= strlen(newInputStr) && maxTrans > 0){
         if(st->stTyp == acceptSt){
             printf("%d accept\n", st->q);
             terminated = true;
@@ -194,7 +194,6 @@ void stateMachine(vector<State*>* states, int startState, char* inputString, int
     if(!terminated){
         printf("%d quit\n", st->q);
     }
-    printf("done\n");
     return;
 }
 
