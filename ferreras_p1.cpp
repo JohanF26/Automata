@@ -29,8 +29,7 @@ public:
     State(){
     }
     ~State(){
-        free transitions;
-        delete transitions;
+        free(transitions);
     }
 };
 
@@ -321,6 +320,9 @@ int main(int argc, char *argv[]){
         }
     }
     */
+    for(int s = 0; s < states; s++){
+        detele (*states).at(s);
+    }
     return 0;
 
 }
