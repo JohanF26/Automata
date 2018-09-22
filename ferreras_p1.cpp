@@ -320,8 +320,8 @@ int main(int argc, char *argv[]){
         }
     }
     */
-    for(int s = 0; s < states; s++){
-        detele (*states).at(s);
+    for(int s = 0; s < states.size(); s++){
+        delete states.at(s);
     }
     return 0;
 
