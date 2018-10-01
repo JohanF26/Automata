@@ -152,12 +152,19 @@ void stateMachine(vector<State*>* states, int startState, char* inputString, int
     char newInputStr[maxTrans*2];
     //bs: blank space
     for(int bs = 0; bs < maxTrans*2; bs++){
-        if(bs >= maxTrans && bs < (maxTrans+sizeof(inputString))){
+        if(bs >= maxTrans && bs < (maxTrans+strlen(inputString))){
+            //printf("%s\n", newInputStr);
+            if(bs == maxTrans){
+                newInputStr[bs] = '\0';
+            }
             strcat(newInputStr, inputString);
+            //printf("%s\n", inputString);
+            bs += strlen(inputString)-1;
         } else{
             newInputStr[bs] = '_';
         }
     }
+    //printf("%s\n", newInputStr);
     State* st;
     bool terminated = false;
 
@@ -168,9 +175,9 @@ void stateMachine(vector<State*>* states, int startState, char* inputString, int
         }
     }
 
-    int i = 1;
+    int i = maxTrans;
     int newQ;
-    while(i < strlen(newInputStr) && maxTrans > 0){
+    while(i <= strlen(newInputStr) && maxTrans > 0){
         if(st->stTyp == acceptSt){
             printf("%d accept\n", st->q);
             terminated = true;
