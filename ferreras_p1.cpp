@@ -149,8 +149,15 @@ int processFile(char* fileName, vector<State*>* states){
 }
 
 void stateMachine(vector<State*>* states, int startState, char* inputString, int maxTrans){
-    char newInputStr[sizeof(inputString)+2];
-    sprintf(newInputStr, "_%s_", inputString);
+    char newInputStr[maxTrans*2];
+    //bs: blank space
+    for(int bs = 0; bs < maxTrans*2; bs++){
+        if(bs >= maxTrans && bs < (maxTrans+sizeof(inputString))){
+            newInputStr = newInputStr + inputString;
+        } else{
+            newInputStr[bs] = '_';
+        }
+    }
     State* st;
     bool terminated = false;
 
@@ -163,7 +170,7 @@ void stateMachine(vector<State*>* states, int startState, char* inputString, int
 
     int i = 1;
     int newQ;
-    while(i <= strlen(newInputStr) && maxTrans > 0){
+    while(i < strlen(newInputStr) && maxTrans > 0){
         if(st->stTyp == acceptSt){
             printf("%d accept\n", st->q);
             terminated = true;
@@ -180,17 +187,9 @@ void stateMachine(vector<State*>* states, int startState, char* inputString, int
                     newQ = st->transitions[j].r;
                     newInputStr[i] = st->transitions[j].b;
                     if(st->transitions[j].x == 'L'){
-                        if(i == 0){
-				continue;
-			} else{
-			   	i--;
-			}
+                        i--;
                     } else{
-			if(i > strlen(newInputStr)){
-                        	continue;
-			} else{
-				i++;
-			}
+                        i++;
                     }
                     break;
                 }
