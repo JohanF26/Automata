@@ -153,7 +153,7 @@ void stateMachine(vector<State*>* states, int startState, char* inputString, int
     //bs: blank space
     for(int bs = 0; bs < maxTrans*2; bs++){
         if(bs >= maxTrans && bs < (maxTrans+sizeof(inputString))){
-            newInputStr = newInputStr + inputString;
+            strcat(newInputStr, inputString);
         } else{
             newInputStr[bs] = '_';
         }
